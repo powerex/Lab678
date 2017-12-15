@@ -27,16 +27,17 @@ RegisterComponent RegisterComponent::getChild(int i) {
 }
 
 ostream &operator<<(ostream &os, const RegisterComponent &rc) {
+
     for (int i=0; i<rc.level; i++) os << '\t';
     os << rc.level << ": " << rc.name << endl;
-    vector<RegisterComponent> vc = rc.getComponents();
-    for (RegisterComponent& r: vc) {
-        for (int i=0; i<rc.level+1; i++) os << '\t';
-        os << r << endl;
-    }
 
     vector<Record> vr = rc.getRecords();
     for (Record& r: vr) {
+        for (int i=0; i<rc.level; i++) os << '\t';
+        os << (*(r.getFile())).getName() << '.' << (*(r.getFile())).getFileType() << endl;
+    }
+    vector<RegisterComponent> vc = rc.getComponents();
+    for (RegisterComponent& r: vc) {
         for (int i=0; i<rc.level+1; i++) os << '\t';
         os << r << endl;
     }

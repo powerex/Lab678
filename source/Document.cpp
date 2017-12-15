@@ -26,3 +26,11 @@ ostream &operator<<(ostream &os, const Document &d) {
 Document::operator float() {
     return this->size;
 }
+
+const string &Document::getName() const {
+    return name;
+}
+
+const FileType &Document::getFileType() const {
+    return fileType;
+}

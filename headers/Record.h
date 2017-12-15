@@ -30,6 +30,11 @@ public:
     Record(File *file);
     Record();
     virtual ~Record();
+
+    File *getFile() const;
+
+    const Date &getRecordDate() const;
+
     //------------------------------------
     friend ostream& operator<<(ostream& os, const Record& r);
 };

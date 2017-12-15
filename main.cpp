@@ -103,7 +103,7 @@ int main() {
     rc.addRecord(r2);
 
     child1.addRecord(r3);
-    child1.addRecord(r4);
+
     rc.addComponent(child1);
 
     cout << rc;

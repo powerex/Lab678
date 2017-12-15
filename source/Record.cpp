@@ -23,3 +23,11 @@ ostream &operator<<(ostream &os, const Record &r) {
     os << *(r.file) << endl << r.recordDate;
     return os;
 }
+
+File *Record::getFile() const {
+    return file;
+}
+
+const Date &Record::getRecordDate() const {
+    return recordDate;
+}

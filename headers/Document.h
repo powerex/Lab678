@@ -25,6 +25,11 @@ protected:
 public:
     Document(const string &name, const FileType &fileType, const Date &creationDate, float size);
     Document();
+
+    const string &getName() const;
+
+    const FileType &getFileType() const;
+
     //---------------------------------------------------------------
     operator float();
     friend ostream& operator<<(ostream& os, const Document& d);
