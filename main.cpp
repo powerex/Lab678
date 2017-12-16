@@ -13,6 +13,7 @@
 #include "headers/Statictic.h"
 #include "headers/Person_old.h"
 #include "headers/RegisterComponent.h"
+#include "headers/Serializer.h"
 
 using namespace std;
 
@@ -84,7 +85,7 @@ int main() {
         cout << pers.at(i) << "\n\n";
     }
 */
-
+/*
     RegisterComponent rc("root", 0);
     RegisterComponent child1;
     RegisterComponent child2;
@@ -122,6 +123,36 @@ int main() {
     for (auto i=0; i<N; i++)
         delete r[i];
     delete [] r;
+*/
+
+/*
+    Document doc[10];
+    Document::tableHeader();
+    for (auto i=0;i<10;i++)
+        doc[i].tableShow();
+*/
+
+/*
+    Document d;
+    cout << d << endl;
+    Serializer<Document>::serialize(&d, "Test.dat");
+    Document* x;
+    Serializer<Document>::unserialize(x, "Test.dat");
+    cout << (*x) << endl;
+*/
+
+    const int N = 10000;
+    Document** docs = new Document*[N];
+    for (auto i=0; i<N; i++)
+        docs[i] = new Document;
+
+    //Serializer<Document>::serializeArray(docs, N, "ZArray.dat");
+
+    for (auto i=0; i<N; i++)
+        delete docs[i];
+    delete [] docs;
+
+
 
     return 0;
 }

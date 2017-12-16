@@ -25,13 +25,12 @@ protected:
 public:
     Document(const string &name, const FileType &fileType, const Date &creationDate, float size);
     Document();
-
     const string &getName() const;
-
     const FileType &getFileType() const;
-
     //---------------------------------------------------------------
     operator float();
+    virtual void tableShow();
+    static void tableHeader();
     friend ostream& operator<<(ostream& os, const Document& d);
 };
 

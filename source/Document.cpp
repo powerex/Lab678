@@ -34,3 +34,11 @@ const string &Document::getName() const {
 const FileType &Document::getFileType() const {
     return fileType;
 }
+
+void Document::tableShow() {
+    cout << setiosflags(ios::right) << '|' << setw(15) << name << '.' << fileType << " |\t" << creationDate << " |" << setfill(' ') << setw(8) << size << "Kb |\n";
+}
+
+void Document::tableHeader() {
+    cout << setiosflags(ios::right) << '|' << setw(21) << "FILENAME |" << setw(12) << "DATE" << " |" << setw(12) << " SIZE(Kb) |" << "\n";
+}
