@@ -34,6 +34,7 @@ public:
     friend ostream& operator<<(ostream& os, const File& f);
     //-------------------------------------------------
     const vector<string> &getKeywords() const;
+    const Date &getSaveDate() const;
 };
 
 

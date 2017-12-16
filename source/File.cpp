@@ -38,3 +38,7 @@ const vector<string> &File::getKeywords() const {
 File::File(const Path &path, Person *author, const vector<string> &keywords, const Date &saveDate) {
 
 }
+
+const Date &File::getSaveDate() const {
+    return saveDate;
+}

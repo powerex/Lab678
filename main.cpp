@@ -87,27 +87,41 @@ int main() {
 
     RegisterComponent rc("root", 0);
     RegisterComponent child1;
+    RegisterComponent child2;
+    RegisterComponent child3;
+    RegisterComponent child4;
 
-    Record r1;
-    this_thread::sleep_for(chrono::milliseconds(1000));
-    Record r2;
-    this_thread::sleep_for(chrono::milliseconds(1000));
-    Record r3;
-    this_thread::sleep_for(chrono::milliseconds(1000));
-    Record r4;
-    this_thread::sleep_for(chrono::milliseconds(1000));
+    const int N = 10;
+    Record** r = new Record*[N];
+    for (auto i=0; i<N; i++) {
+        r[i] = new Record;
+        this_thread::sleep_for(chrono::milliseconds(1000));
+    }
+    rc.addRecord(r[0]);
+    rc.addRecord(r[1]);
 
-    cout << r1 << "\n\n" << r2 << "\n\n" << r3 << "\n\n";
+    child1.addRecord(r[2]);
+    child1.addRecord(r[3]);
 
-    rc.addRecord(r1);
-    rc.addRecord(r2);
+    child2.addRecord(r[4]);
+    child2.addRecord(r[5]);
+    child2.addRecord(r[6]);
 
-    child1.addRecord(r3);
+    child3.addRecord(r[7]);
+    child3.addRecord(r[8]);
 
-    rc.addComponent(child1);
+    child4.addRecord(r[9]);
+
+    rc.addComponent(&child1);
+    rc.addComponent(&child3);
+    child1.addComponent(&child2);
+    child2.addComponent(&child4);
 
     cout << rc;
 
+    for (auto i=0; i<N; i++)
+        delete r[i];
+    delete [] r;
 
     return 0;
 }

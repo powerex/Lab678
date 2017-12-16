@@ -23,46 +23,38 @@ RegisterComponent::RegisterComponent() {
 RegisterComponent RegisterComponent::getChild(int i) {
     if (i < 0 || i >= components.size())
         throw new UnsupportedOperationException;
-    return components.at(i);
+    return *(components.at(i));
 }
 
 ostream &operator<<(ostream &os, const RegisterComponent &rc) {
 
-    for (int i=0; i<rc.level; i++) os << '\t';
+    //for (int i=0; i<rc.level; i++) os << '\t';
     os << rc.level << ": " << rc.name << endl;
 
-    vector<Record> vr = rc.getRecords();
-    for (Record& r: vr) {
+    vector<Record*> vr = rc.getRecords();
+    for (Record*& r: vr) {
         for (int i=0; i<rc.level; i++) os << '\t';
-        os << (*(r.getFile())).getName() << '.' << (*(r.getFile())).getFileType() << endl;
+        os << r->getFile()->getName() << '.' << r->getFile()->getFileType() << '\t' << r->getFile()->getSaveDate() << endl;
     }
-    vector<RegisterComponent> vc = rc.getComponents();
-    for (RegisterComponent& r: vc) {
+    vector<RegisterComponent*> vc = rc.getComponents();
+    for (RegisterComponent*& r: vc) {
         for (int i=0; i<rc.level+1; i++) os << '\t';
-        os << r << endl;
+        os << (*r);
     }
 
     return os;
 }
 
-void RegisterComponent::addComponent(RegisterComponent& component) {
-    component.updateLevel(this->level+1);
+void RegisterComponent::addComponent(RegisterComponent* component) {
+    component->updateLevel(this->level+1);
     components.push_back(component);
 }
 
-void RegisterComponent::addRecord(Record& record) {
+void RegisterComponent::addRecord(Record* record) {
     records.push_back(record);
 }
 
 RegisterComponent::~RegisterComponent() {
-}
-
-const vector<Record> &RegisterComponent::getRecords() const {
-    return records;
-}
-
-const vector<RegisterComponent> &RegisterComponent::getComponents() const {
-    return components;
 }
 
 void RegisterComponent::setLevel(int level) {
@@ -71,7 +63,15 @@ void RegisterComponent::setLevel(int level) {
 
 void RegisterComponent::updateLevel(int l) {
     this->level = l;
-    for (RegisterComponent& r: components) {
-        r.updateLevel(l+1);
+    for (RegisterComponent*& r: components) {
+        r->updateLevel(l+1);
     }
+}
+
+const vector<Record *> &RegisterComponent::getRecords() const {
+    return records;
+}
+
+const vector<RegisterComponent *> &RegisterComponent::getComponents() const {
+    return components;
 }
