@@ -123,7 +123,7 @@ int main() {
     for (auto i=0; i<N; i++)
         delete r[i];
     delete [] r;
-*/
+//*/
 
 /*
     Document doc[10];
@@ -140,19 +140,33 @@ int main() {
     Serializer<Document>::unserialize(x, "Test.dat");
     cout << (*x) << endl;
 */
-
-    const int N = 10000;
+//*
+    const int N = 10;
     Document** docs = new Document*[N];
+/*
     for (auto i=0; i<N; i++)
         docs[i] = new Document;
 
-    //Serializer<Document>::serializeArray(docs, N, "ZArray.dat");
+    for (auto i = 0 ;i<N; i++)
+        cout << *(docs[i]) << endl;
+
+    Serializer<Document>::serializeArray(docs, N, "ZArray.dat");
+
+    for (auto i=0; i<N; i++)
+        delete docs[i];
+    delete [] docs;
+//*/
+
+//*
+    Serializer<Document>::unserializeArray(docs, N, "ZArray.dat");
+    for (auto i = 0 ;i<N; i++)
+        cout << *(docs[i]) << endl;
 
     for (auto i=0; i<N; i++)
         delete docs[i];
     delete [] docs;
 
-
+//*/
 
     return 0;
 }

@@ -31,7 +31,7 @@ public:
 
     static void unserialize(T*& element, string fileName) {
         fstream file;
-        file.open(fileName, ios::app | ios::out | ios::in | ios::binary );
+        file.open(fileName, ios::app | ios::in | ios::binary );
         if (file) {
             file.seekg(0);
             file.read(reinterpret_cast<char *>(element), sizeof(T));
@@ -39,6 +39,21 @@ public:
         }
     }
 
+    static void unserializeArray(T**& elements, int size, string fileName) {
+        fstream file;
+        file.open(fileName, ios::app | ios::out | ios::binary );
+        file.seekg(0);
+        elements = new T*[size];
+        for (auto i=0; i<size; i++)
+            elements[i] = new T;
+        auto i = 0;
+        T tmp;
+        while (!file.eof()) {
+            file.read(reinterpret_cast<char *>(&tmp), sizeof(T));
+            elements[i++] = &tmp;
+        }
+        file.close();
+    }
 
 
 };
